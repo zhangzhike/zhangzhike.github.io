@@ -61,11 +61,11 @@
 	        
 				<li><a href="/tags/生活/">生活</a></li>
 	        
-				<li><a href="/">学习</a></li>
+				<li><a href="/tags/学习/">学习</a></li>
 	        
-				<li><a href="/">工作</a></li>
+				<li><a href="/tags/工作/">工作</a></li>
 	        
-				<li><a href="/">感悟</a></li>
+				<li><a href="/tags/感悟/">感悟</a></li>
 	        
 			</ul>
 		</nav>
@@ -203,11 +203,11 @@
 		        
 					<li style="width: 20%"><a href="/tags/生活/">生活</a></li>
 		        
-					<li style="width: 20%"><a href="/">学习</a></li>
+					<li style="width: 20%"><a href="/tags/学习/">学习</a></li>
 		        
-					<li style="width: 20%"><a href="/">工作</a></li>
+					<li style="width: 20%"><a href="/tags/工作/">工作</a></li>
 		        
-					<li style="width: 20%"><a href="/">感悟</a></li>
+					<li style="width: 20%"><a href="/tags/感悟/">感悟</a></li>
 		        
 				</ul>
 			</nav>
@@ -224,19 +224,90 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="[layout]-我是好人" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
+    <article id="post-WeChat-shake" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/22/我是好人/">我是好人</a>
+      <a class="article-title" href="/2017/06/25/WeChat-shake/">.net实现微信摇一摇获取ibeacon详细信息</a>
     </h1>
   
 
         
-        <a href="/2017/06/22/我是好人/" class="archive-article-date">
+        <a href="/2017/06/25/WeChat-shake/" class="archive-article-date">
+  	<time datetime="2017-06-25T05:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>最近，看下了关于微信摇一摇，如何获取周边蓝牙设备的详细信息。下面我用.net实现的语法写出来，希望对您有所帮助。</p>
+<h1 id="通过ticket获取用户openId和蓝牙信息"><a href="#通过ticket获取用户openId和蓝牙信息" class="headerlink" title="通过ticket获取用户openId和蓝牙信息"></a>通过ticket获取用户openId和蓝牙信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static shake GetShakeByTicket(string ticket, out string errmsg)</div><div class="line">&#123;</div><div class="line">    shake shake = new shake();</div><div class="line">    string appid = ConfigurationManager.AppSettings[<span class="string">"AppId"</span>];</div><div class="line">    string secret = ConfigurationManager.AppSettings[<span class="string">"AppSecret"</span>];</div><div class="line">    string access_token = WechatHelper.GetAccessToken(appid, secret, out errmsg);</div><div class="line">    <span class="keyword">if</span> (errmsg == <span class="string">""</span>)</div><div class="line">    &#123;</div><div class="line">        var url = string.Format(URL_FORMAT_IBEACONTICKET, access_token);</div><div class="line">        Dictionary&lt;string, object&gt; dictShakeInfo = PostHttpValue(url, ticket);</div><div class="line">        Beacon_info bif = new Beacon_info();</div><div class="line">        ShakeInfo sif = new ShakeInfo();</div><div class="line">        <span class="keyword">if</span> (dictShakeInfo.ContainsKey(<span class="string">"data"</span>))</div><div class="line">        &#123;</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            Dictionary&lt;string, object&gt; shakeInfo = dictShakeInfo[<span class="string">"data"</span>] as Dictionary&lt;string, object&gt;;</div><div class="line">            Dictionary&lt;string, object&gt; beconInfo = shakeInfo[<span class="string">"beacon_info"</span>] as Dictionary&lt;string, object&gt;;</div><div class="line">            bif.uuid = beconInfo[<span class="string">"uuid"</span>].ToString();</div><div class="line">            bif.major = beconInfo[<span class="string">"major"</span>].ToString();</div><div class="line">            sif.openid = shakeInfo[<span class="string">"openid"</span>].ToString();</div><div class="line">            sif.beacon_info = bif;</div><div class="line">            shake.shakeInfo = sif;</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">       </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        shake.errmsg = <span class="string">"access_token超时"</span>;</div><div class="line">        shake.errcode = <span class="string">"hrone_40001"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> shake;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="通过post请求获取微信公众号返回信息"><a href="#通过post请求获取微信公众号返回信息" class="headerlink" title="通过post请求获取微信公众号返回信息"></a>通过post请求获取微信公众号返回信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public static Dictionary&lt;string, object&gt; PostHttpValue(string url, string ticket)</div><div class="line">&#123;</div><div class="line">    Uri address = new Uri(url);</div><div class="line">    // Create the web request</div><div class="line">    HttpWebRequest request = WebRequest.Create(address) as HttpWebRequest;</div><div class="line">    Dictionary&lt;string, object&gt; dirData = new Dictionary&lt;string, object&gt;();</div><div class="line">    // Set <span class="built_in">type</span> to POST</div><div class="line">    request.Method = <span class="string">"POST"</span>;</div><div class="line">    request.ContentType = <span class="string">"application/json"</span>;</div><div class="line">    string data1 = <span class="string">"&#123;\"ticket\":\""</span> + ticket + <span class="string">"\",\"need_poi\":1"</span> + <span class="string">"&#125;"</span>;</div><div class="line">    byte[] byteData = UTF8Encoding.UTF8.GetBytes(data1);</div><div class="line">    request.ContentLength = byteData.Length;</div><div class="line">    using (Stream postStream = request.GetRequestStream())</div><div class="line">    &#123;</div><div class="line">        postStream.Write(byteData, 0, byteData.Length);</div><div class="line">    &#125;</div><div class="line">    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)</div><div class="line">    &#123;</div><div class="line">        StreamReader reader = new StreamReader(response.GetResponseStream());</div><div class="line">        JavaScriptSerializer Jss = new JavaScriptSerializer();</div><div class="line">        dirData = (Dictionary&lt;string, object&gt;)Jss.DeserializeObject(reader.ReadToEnd());</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (dirData == null)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">return</span> new Dictionary&lt;string, object&gt;();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> dirData;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习/" class="article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/25/WeChat-shake/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="[layout]-good-person" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/22/good-person/">我是好人</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/22/good-person/" class="archive-article-date">
   	<time datetime="2017-06-22T02:07:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
@@ -244,7 +315,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>如何才能成为一个好人呢？我想每个人都会思考的问题。回蓦过去，我们或多或少都做过一些可笑之事或者错事。俗话说亡羊补牢，犹未为晚。只要我们端正态度，从心开始，认真对待生活的每一件事，“好人”离我们还会远吗？</p>
+<h1 id="端正态度"><a href="#端正态度" class="headerlink" title="端正态度"></a>端正态度</h1><h2 id="要学会赞美别人"><a href="#要学会赞美别人" class="headerlink" title="要学会赞美别人"></a>要学会赞美别人</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">人际关系是非常微妙的，如果想要别人重视我们，认可我们，支持我们，那么重要的就是以德服人，换位思考，我们也应该学会去欣赏别人，赞美别人，尊重别人。</div></pre></td></tr></table></figure>
+<h2 id="懂得沟通交流重要性"><a href="#懂得沟通交流重要性" class="headerlink" title="懂得沟通交流重要性"></a>懂得沟通交流重要性</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">人际关系重要的是沟通，只有积极沟通，才能避免一些误会的产生，一旦有什么不理想的人际关系出现，我们就应该积极沟通交流，从而消除一些不良的影响。</div></pre></td></tr></table></figure>
+<h2 id="培养积极阳光的心态"><a href="#培养积极阳光的心态" class="headerlink" title="培养积极阳光的心态"></a>培养积极阳光的心态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">我们无论做任何事情，都要有一个积极向上的心态，这种积极阳光的处世态度，能够感染很多人，让周围的人都能够享受到和你相处的好感，让相处更加融洽。</div></pre></td></tr></table></figure>
+<h2 id="做一个诚实守信的人"><a href="#做一个诚实守信的人" class="headerlink" title="做一个诚实守信的人"></a>做一个诚实守信的人</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">诚实是立人之本，所以，无论任何时候，在与外界沟通的时候，一定要做到诚实，不要撒谎，也不要去做一些虚伪敷衍的事情，只要守信用，才能让大家更信任你。</div></pre></td></tr></table></figure>
+<h3 id="严于律己宽以待人"><a href="#严于律己宽以待人" class="headerlink" title="严于律己宽以待人"></a>严于律己宽以待人</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">做人要对自己严格，不能放松对自己的要求，特别是与人交往的时候，不能对别人苛刻，反倒对自己比较放松，这样做的坏处就是会让别人与你接触时感到压力。</div></pre></td></tr></table></figure>
+<h3 id="了解合作才能共赢"><a href="#了解合作才能共赢" class="headerlink" title="了解合作才能共赢"></a>了解合作才能共赢</h3><pre><code class="bash">我们应该懂得一个道理，就是说大家要团结，要懂得合作，只有大家团结协作，合作共事，才能让自己和集体的利益得到保证，不要单打独斗，更不能靠一己之力。
+</code></pre>
+<h3 id="让自己充满正能量"><a href="#让自己充满正能量" class="headerlink" title="让自己充满正能量"></a>让自己充满正能量</h3><pre><code class="bash">我们应该让自己浑身充满正能量，让大家感受你是一个正派的人，要学会关心别人，当别人遇到困难的时候，能够积极帮助别人，给自己一个良好的展示机会。
+</code></pre>
+<p>……其实还有好多种途径让我们做一个合格的好人，在此就不一一列举！此刻，让我们携手构建美好未来，做一个合格的“好人”。<br><img src="/images/haoren.jpg" alt="我是好人"></p>
+
       
 
       
@@ -264,77 +346,10 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活/" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/22/我是好人/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/hello-world/" class="archive-article-date">
-  	<time datetime="2017-06-20T06:25:08.265Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/good-person/">展开全文 >></a>
         </p>
       
 
@@ -439,6 +454,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>

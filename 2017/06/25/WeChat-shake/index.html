@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/6 | 小小志的blog</title>
+  <title>.net实现微信摇一摇获取ibeacon详细信息 | 小小志的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生活赋予我们一种巨大的和无限高贵的礼品，这就是青春：充满着力量，充满着期待志愿，充满着求知和斗争的志向，充满着希望信心和青春">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小小志的blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/06/index.html">
+  <meta name="description" content="最近，看下了关于微信摇一摇，如何获取周边蓝牙设备的详细信息。下面我用.net实现的语法写出来，希望对您有所帮助。 通过ticket获取用户openId和蓝牙信息12345678910111213141516171819202122232425262728293031323334353637383940public static shake GetShakeByTicket(string tic">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".net实现微信摇一摇获取ibeacon详细信息">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/WeChat-shake/index.html">
 <meta property="og:site_name" content="小小志的blog">
-<meta property="og:description" content="生活赋予我们一种巨大的和无限高贵的礼品，这就是青春：充满着力量，充满着期待志愿，充满着求知和斗争的志向，充满着希望信心和青春">
+<meta property="og:description" content="最近，看下了关于微信摇一摇，如何获取周边蓝牙设备的详细信息。下面我用.net实现的语法写出来，希望对您有所帮助。 通过ticket获取用户openId和蓝牙信息12345678910111213141516171819202122232425262728293031323334353637383940public static shake GetShakeByTicket(string tic">
+<meta property="og:updated_time" content="2017-06-26T01:49:31.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小小志的blog">
-<meta name="twitter:description" content="生活赋予我们一种巨大的和无限高贵的礼品，这就是青春：充满着力量，充满着期待志愿，充满着求知和斗争的志向，充满着希望信心和青春">
+<meta name="twitter:title" content=".net实现微信摇一摇获取ibeacon详细信息">
+<meta name="twitter:description" content="最近，看下了关于微信摇一摇，如何获取周边蓝牙设备的详细信息。下面我用.net实现的语法写出来，希望对您有所帮助。 通过ticket获取用户openId和蓝牙信息12345678910111213141516171819202122232425262728293031323334353637383940public static shake GetShakeByTicket(string tic">
   
     <link rel="alternative" href="/atom.xml" title="小小志的blog" type="application/atom+xml">
   
@@ -222,36 +224,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-WeChat-shake" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/25/WeChat-shake/" class="archive-article-date">
-  	<time datetime="2017-06-25T05:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/25/WeChat-shake/">.net实现微信摇一摇获取ibeacon详细信息</a>
+    <h1 class="article-title" itemprop="name">
+      .net实现微信摇一摇获取ibeacon详细信息
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/25/WeChat-shake/" class="archive-article-date">
+  	<time datetime="2017-06-25T05:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>最近，看下了关于微信摇一摇，如何获取周边蓝牙设备的详细信息。下面我用.net实现的语法写出来，希望对您有所帮助。</p>
+<h1 id="通过ticket获取用户openId和蓝牙信息"><a href="#通过ticket获取用户openId和蓝牙信息" class="headerlink" title="通过ticket获取用户openId和蓝牙信息"></a>通过ticket获取用户openId和蓝牙信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static shake GetShakeByTicket(string ticket, out string errmsg)</div><div class="line">&#123;</div><div class="line">    shake shake = new shake();</div><div class="line">    string appid = ConfigurationManager.AppSettings[<span class="string">"AppId"</span>];</div><div class="line">    string secret = ConfigurationManager.AppSettings[<span class="string">"AppSecret"</span>];</div><div class="line">    string access_token = WechatHelper.GetAccessToken(appid, secret, out errmsg);</div><div class="line">    <span class="keyword">if</span> (errmsg == <span class="string">""</span>)</div><div class="line">    &#123;</div><div class="line">        var url = string.Format(URL_FORMAT_IBEACONTICKET, access_token);</div><div class="line">        Dictionary&lt;string, object&gt; dictShakeInfo = PostHttpValue(url, ticket);</div><div class="line">        Beacon_info bif = new Beacon_info();</div><div class="line">        ShakeInfo sif = new ShakeInfo();</div><div class="line">        <span class="keyword">if</span> (dictShakeInfo.ContainsKey(<span class="string">"data"</span>))</div><div class="line">        &#123;</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            Dictionary&lt;string, object&gt; shakeInfo = dictShakeInfo[<span class="string">"data"</span>] as Dictionary&lt;string, object&gt;;</div><div class="line">            Dictionary&lt;string, object&gt; beconInfo = shakeInfo[<span class="string">"beacon_info"</span>] as Dictionary&lt;string, object&gt;;</div><div class="line">            bif.uuid = beconInfo[<span class="string">"uuid"</span>].ToString();</div><div class="line">            bif.major = beconInfo[<span class="string">"major"</span>].ToString();</div><div class="line">            sif.openid = shakeInfo[<span class="string">"openid"</span>].ToString();</div><div class="line">            sif.beacon_info = bif;</div><div class="line">            shake.shakeInfo = sif;</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">       </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            shake.errmsg = dictShakeInfo[<span class="string">"errmsg"</span>].ToString();</div><div class="line">            shake.errcode = dictShakeInfo[<span class="string">"errcode"</span>].ToString();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        shake.errmsg = <span class="string">"access_token超时"</span>;</div><div class="line">        shake.errcode = <span class="string">"hrone_40001"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> shake;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="通过post请求获取微信公众号返回信息"><a href="#通过post请求获取微信公众号返回信息" class="headerlink" title="通过post请求获取微信公众号返回信息"></a>通过post请求获取微信公众号返回信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public static Dictionary&lt;string, object&gt; PostHttpValue(string url, string ticket)</div><div class="line">&#123;</div><div class="line">    Uri address = new Uri(url);</div><div class="line">    // Create the web request</div><div class="line">    HttpWebRequest request = WebRequest.Create(address) as HttpWebRequest;</div><div class="line">    Dictionary&lt;string, object&gt; dirData = new Dictionary&lt;string, object&gt;();</div><div class="line">    // Set <span class="built_in">type</span> to POST</div><div class="line">    request.Method = <span class="string">"POST"</span>;</div><div class="line">    request.ContentType = <span class="string">"application/json"</span>;</div><div class="line">    string data1 = <span class="string">"&#123;\"ticket\":\""</span> + ticket + <span class="string">"\",\"need_poi\":1"</span> + <span class="string">"&#125;"</span>;</div><div class="line">    byte[] byteData = UTF8Encoding.UTF8.GetBytes(data1);</div><div class="line">    request.ContentLength = byteData.Length;</div><div class="line">    using (Stream postStream = request.GetRequestStream())</div><div class="line">    &#123;</div><div class="line">        postStream.Write(byteData, 0, byteData.Length);</div><div class="line">    &#125;</div><div class="line">    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)</div><div class="line">    &#123;</div><div class="line">        StreamReader reader = new StreamReader(response.GetResponseStream());</div><div class="line">        JavaScriptSerializer Jss = new JavaScriptSerializer();</div><div class="line">        dirData = (Dictionary&lt;string, object&gt;)Jss.DeserializeObject(reader.ReadToEnd());</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (dirData == null)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">return</span> new Dictionary&lt;string, object&gt;();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> dirData;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -263,7 +286,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -276,55 +299,118 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/25/WeChat-shake/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-[layout]">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/22/good-person/" class="archive-article-date">
-  	<time datetime="2017-06-22T02:07:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/22/good-person/">我是好人</a>
-    </h1>
+  
+    <a href="/2017/06/22/good-person/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我是好人</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="WeChat-shake" data-title=".net实现微信摇一摇获取ibeacon详细信息" data-url="http://yoursite.com/2017/06/25/WeChat-shake/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/06/25/WeChat-shake/", 
+    sourceId: "WeChat-shake",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -347,8 +433,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
